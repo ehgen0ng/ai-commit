@@ -125,6 +125,20 @@
           "maximum": 2,
           "description": "OpenAI temperature setting (0-2). Higher values make output more random, lower values more deterministic."
         },
+        "ai-commit.OPENAI_API_MODE": {
+          "type": "string",
+          "default": "chat",
+          "description": "OpenAI API mode. 'chat' uses /v1/chat/completions (recommended, compatible with most third-party gateways). 'responses' uses the new /v1/responses endpoint (official OpenAI only).",
+          "enum": [
+            "chat",
+            "responses"
+          ]
+        },
+        "ai-commit.OPENAI_STREAM": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use streaming mode to receive the response. Useful when the upstream gateway drops content in non-stream mode."
+        },
         "ai-commit.AI_PROVIDER": {
           "type": "string",
           "default": "openai",
@@ -138,6 +152,11 @@
           "type": "string",
           "default": "",
           "description": "Gemini API Key"
+        },
+        "ai-commit.GEMINI_BASE_URL": {
+          "type": "string",
+          "default": "",
+          "description": "Gemini BASE URL. Leave empty to use Google's default endpoint, or set to a proxy/gateway URL."
         },
         "ai-commit.GEMINI_MODEL": {
           "type": "string",
@@ -195,9 +214,9 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.21.0",
+    "@google/genai": "^1.50.0",
     "fs-extra": "^11.0.4",
-    "openai": "^4.14.2",
+    "openai": "^6.34.0",
     "simple-git": "^3.17.0"
   },
   "resolutions": {

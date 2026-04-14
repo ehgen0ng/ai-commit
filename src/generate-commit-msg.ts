@@ -1,9 +1,8 @@
 import * as fs from 'fs-extra';
-import { ChatCompletionMessageParam } from 'openai/resources';
 import * as vscode from 'vscode';
 import { ConfigKeys, ConfigurationManager } from './config';
 import { getDiffStaged } from './git-utils';
-import { ChatGPTAPI } from './openai-utils';
+import { ChatGPTAPI, ChatMessage } from './openai-utils';
 import { getMainCommitPrompt } from './prompts';
 import { ProgressHandler } from './utils';
 import { GeminiAPI } from './gemini-utils';
@@ -122,7 +121,7 @@ export async function generateCommitMsg(arg) {
           if (!openaiApiKey) {
             throw new Error('OpenAI API Key not configured');
           }
-          commitMessage = await ChatGPTAPI(messages as ChatCompletionMessageParam[]);
+          commitMessage = await ChatGPTAPI(messages as ChatMessage[]);
         }
 
 

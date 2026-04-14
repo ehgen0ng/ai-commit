@@ -67,7 +67,10 @@ In the VSCode settings, locate the "ai-commit" configuration options and configu
 | OPENAI_MODEL       | string |        gpt-4o        |   Yes    |      OpenAI MODEL, you can select a model from the list by running the `Show Available OpenAI Models` command      |
 | AZURE_API_VERSION  | string |         None         |    No    |                                                 AZURE_API_VERSION                                                  |
 | OPENAI_TEMPERATURE | number |         0.7          |    No    |      Controls randomness in the output. Range: 0-2. Lower values: more focused, Higher values: more creative       |
+| OPENAI_API_MODE    | string |         chat         |    No    |   OpenAI API mode: `chat` (Chat Completions, compatible with most third-party gateways) or `responses` (OpenAI's new Responses API).   |
+| OPENAI_STREAM      | boolean |       false         |    No    |   Use streaming mode to receive the response. Useful when the upstream gateway drops content in non-stream mode.   |
 | GEMINI_API_KEY     | string |         None         |   Yes    |     Required when `AI Provider` is set to `Gemini`. [Gemini API key](https://makersuite.google.com/app/apikey)     |
+| GEMINI_BASE_URL    | string |         None         |    No    |                 Gemini BASE URL. Leave empty to use Google's default endpoint, or set to a proxy/gateway URL.                 |
 | GEMINI_MODEL       | string | gemini-2.0-flash-001 |   Yes    |                       Gemini MODEL. Currently, model selection is limited to configuration.                        |
 | GEMINI_TEMPERATURE | number |         0.7          |    No    | Controls randomness in the output. Range: 0-2 for Gemini. Lower values: more focused, Higher values: more creative |
 | AI_COMMIT_LANGUAGE | string |          en          |   Yes    |                                               Supports 19 languages                                                |

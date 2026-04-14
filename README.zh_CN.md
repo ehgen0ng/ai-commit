@@ -67,7 +67,10 @@
 | OPENAI_MODEL       | string |        gpt-4o        |  是  |     OpenAI MODEL, 你可以通过运行 `Show Available OpenAI Models` 命令从列表中选择一个模型。      |
 | AZURE_API_VERSION  | string |         None         |  否  |                                        AZURE_API_VERSION                                        |
 | OPENAI_TEMPERATURE | number |         0.7          |  否  |              控制输出的随机性。范围：0-2。较低的值：更加集中，较高的值：更有创造性              |
+| OPENAI_API_MODE    | string |         chat         |  否  |       OpenAI API 模式：`chat`（Chat Completions，兼容绝大多数第三方网关）或 `responses`（OpenAI 官方新版 Responses API）       |
+| OPENAI_STREAM      | boolean |       false         |  否  |       启用流式传输接收响应。当上游网关在非流式模式下丢失 content 字段时使用此选项。       |
 | GEMINI_API_KEY     | string |         None         | Yes  | 将`AI Provider`设置为`Gemini`时需要。[Gemini API key](https://makersuite.google.com/app/apikey) |
+| GEMINI_BASE_URL    | string |         None         |  否  |                 Gemini BASE URL。留空则使用 Google 官方端点，或填写代理/网关地址。                 |
 | GEMINI_MODEL       | string | gemini-2.0-flash-001 | Yes  |                               模型选择仅限于配 Gemini 模型。置。                                |
 | GEMINI_TEMPERATURE | number |         0.7          |  No  |          `Gemini` 控制输出的随机性。范围：0-2。较低的值：更加集中，较高的值：更有创造           |
 | AI_COMMIT_LANGUAGE | string |          en          |  是  |                                         支持 19 种语言                                          |
