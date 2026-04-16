@@ -55,12 +55,10 @@
 
 ### ⚙️ 配置
 
-> **Note** Version >= 0.0.5 不需要配置 `EMOJI_ENABLED` 和 `FULL_GITMOJI_SPEC`，默认提示词为 [prompt/without_gitmoji.md](./prompt/with_gitmoji.md)，如果不需要使用 `Gitmoji`，请将 `SYSTEM_PROMPT` 设置为您的自定义提示词, 请参考 [prompt/without_gitmoji.md](./prompt/without_gitmoji.md)。
-
 在 `VSCode` 设置中，找到 "ai-commit" 配置项，并根据需要进行配置
 
-| 配置               |  类型  |         默认         | 必要 |                                              备注                                               |
-| :----------------- | :----: | :------------------: | :--: | :---------------------------------------------------------------------------------------------: |
+| 配置               |  类型   |         默认         | 必要 |                                              备注                                               |
+| :----------------- | :-----: | :------------------: | :--: | :---------------------------------------------------------------------------------------------: |
 | AI_PROVIDER        | string |        openai        | Yes  |                            Select AI Provider: `openai` or `gemini`.                            |
 | OPENAI_API_KEY     | string |         None         |  是  |                   [OpenAI 令牌](https://platform.openai.com/account/api-keys)                   |
 | OPENAI_BASE_URL    | string |         None         |  否  |       如果是 Azure，使用：https://{resource}.openai.azure.com/openai/deployments/{model}        |
@@ -74,6 +72,7 @@
 | GEMINI_MODEL       | string | gemini-2.0-flash-001 | Yes  |                               模型选择仅限于配 Gemini 模型。置。                                |
 | GEMINI_TEMPERATURE | number |         0.7          |  No  |          `Gemini` 控制输出的随机性。范围：0-2。较低的值：更加集中，较高的值：更有创造           |
 | AI_COMMIT_LANGUAGE | string |          en          |  是  |                                         支持 19 种语言                                          |
+| EMOJI_ENABLED      | boolean |        true         |  否  |                 启用 Gitmoji，关闭后提交信息不包含 emoji 前缀                  |
 | SYSTEM_PROMPT      | string |         None         |  否  |                                        自定义系统提示词                                         |
 
 ## ⌨️ 本地开发

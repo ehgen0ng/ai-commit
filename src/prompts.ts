@@ -6,39 +6,19 @@ import { ConfigKeys, ConfigurationManager } from './config';
  * @param {string} language - The language to be used in the prompt.
  * @returns {Object} - The main prompt object containing role and content.
  */
-const INIT_MAIN_PROMPT = (language: string) => ({
-  role: 'system',
-  content:
-    ConfigurationManager.getInstance().getConfig<string>(ConfigKeys.SYSTEM_PROMPT) ||
-    `# Git Commit Message Guide
+const INIT_MAIN_PROMPT = (language: string) => {
+  const emojiEnabled = ConfigurationManager.getInstance().getConfig<boolean>(ConfigKeys.EMOJI_ENABLED, true);
 
-## Role and Purpose
+  const outputFormatSingle = emojiEnabled
+    ? `<emoji> <type>(<scope>): <subject>\n  <body>`
+    : `<type>(<scope>): <subject>\n  <body>`;
 
-You will act as a git commit message generator. When receiving a git diff, you will ONLY output the commit message itself, nothing else. No explanations, no questions, no additional comments.
+  const outputFormatMultiple = emojiEnabled
+    ? `<emoji> <type>(<scope>): <subject>\n  <body of type 1>\n\n<emoji> <type>(<scope>): <subject>\n  <body of type 2>\n...`
+    : `<type>(<scope>): <subject>\n  <body of type 1>\n\n<type>(<scope>): <subject>\n  <body of type 2>\n...`;
 
-## Output Format
-
-### Single Type Changes
-
-\`\`\`
-<emoji> <type>(<scope>): <subject>
-  <body>
-\`\`\`
-
-### Multiple Type Changes
-
-\`\`\`
-<emoji> <type>(<scope>): <subject>
-  <body of type 1>
-
-<emoji> <type>(<scope>): <subject>
-  <body of type 2>
-...
-\`\`\`
-
-## Type Reference
-
-| Type     | Emoji | Description          | Example Scopes      |
+  const typeReference = emojiEnabled
+    ? `| Type     | Emoji | Description          | Example Scopes      |
 | -------- | ----- | -------------------- | ------------------- |
 | feat     | ✨    | New feature          | user, payment       |
 | fix      | 🐛    | Bug fix              | auth, data          |
@@ -50,7 +30,52 @@ You will act as a git commit message generator. When receiving a git diff, you w
 | build    | 📦    | Build system         | webpack, npm        |
 | ci       | 👷    | CI config            | Travis, Jenkins     |
 | chore    | 🔧    | Other changes        | scripts, config     |
-| i18n     | 🌐    | Internationalization | locale, translation |
+| i18n     | 🌐    | Internationalization | locale, translation |`
+    : `| Type     | Description          | Example Scopes      |
+| -------- | -------------------- | ------------------- |
+| feat     | New feature          | user, payment       |
+| fix      | Bug fix              | auth, data          |
+| docs     | Documentation        | README, API         |
+| style    | Code style           | formatting          |
+| refactor | Code refactoring     | utils, helpers      |
+| perf     | Performance          | query, cache        |
+| test     | Testing              | unit, e2e           |
+| build    | Build system         | webpack, npm        |
+| ci       | CI config            | Travis, Jenkins     |
+| chore    | Other changes        | scripts, config     |
+| i18n     | Internationalization | locale, translation |`;
+
+  const exampleOutput = emojiEnabled
+    ? `♻️ refactor(server): optimize server port configuration`
+    : `refactor(server): optimize server port configuration`;
+
+  return {
+    role: 'system',
+    content:
+      ConfigurationManager.getInstance().getConfig<string>(ConfigKeys.SYSTEM_PROMPT) ||
+      `# Git Commit Message Guide
+
+## Role and Purpose
+
+You will act as a git commit message generator. When receiving a git diff, you will ONLY output the commit message itself, nothing else. No explanations, no questions, no additional comments.
+
+## Output Format
+
+### Single Type Changes
+
+\`\`\`
+${outputFormatSingle}
+\`\`\`
+
+### Multiple Type Changes
+
+\`\`\`
+${outputFormatMultiple}
+\`\`\`
+
+## Type Reference
+
+${typeReference}
 
 ## Writing Rules
 
@@ -99,13 +124,14 @@ diff --git a/src/server.ts b/src/server.ts\n index ad4db42..f3b18a9 100644\n ---
 
 OUTPUT:
 
-♻️ refactor(server): optimize server port configuration
+${exampleOutput}
 
 - rename port variable to uppercase (PORT) to follow constant naming convention
 - add environment variable port support for flexible deployment
 
 Remember: All output MUST be in ${language} language. You are to act as a pure commit message generator. Your response should contain NOTHING but the commit message itself.`
-});
+  };
+};
 
 /**
  * Retrieves the main commit prompt.

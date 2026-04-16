@@ -2,7 +2,7 @@
   "name": "ai-commit",
   "displayName": "AI Commit",
   "description": "Use Azure/OpenAI API to review Git changes, generate conventional commit messages that meet the conventions, simplify the commit process, and keep the commit conventions consistent.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "node": ">=16",
     "vscode": "^1.77.0"
@@ -112,6 +112,11 @@
           "default": "gpt-4o",
           "description": "OpenAI MODEL, you can select a model from the list by running the 'Show Available OpenAI Models' command",
           "type": "string"
+        },
+        "ai-commit.EMOJI_ENABLED": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Gitmoji in commit messages. When enabled, commit messages will include emoji prefixes (e.g. ✨ feat, 🐛 fix)."
         },
         "ai-commit.AI_COMMIT_SYSTEM_PROMPT": {
           "type": "string",

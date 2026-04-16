@@ -55,12 +55,10 @@ Use OpenAI / Azure OpenAI / DeepSeek / Gemini API to review Git changes, generat
 
 ### ⚙️ Configuration
 
-> **Note** Version >= 0.0.5 Don't need to configure `EMOJI_ENABLED` and `FULL_GITMOJI_SPEC`, Default Prompt is [prompt/with_gitmoji.md](./prompt/with_gitmoji.md), If don't need to use `Gitmoji`. Please set `SYSTEM_PROMPT` to your custom prompt, please refer to [prompt/without_gitmoji.md](./prompt/without_gitmoji.md).
-
 In the VSCode settings, locate the "ai-commit" configuration options and configure them as needed:
 
-| Configuration      |  Type  |       Default        | Required |                                                       Notes                                                        |
-| :----------------- | :----: | :------------------: | :------: | :----------------------------------------------------------------------------------------------------------------: |
+| Configuration      |  Type   |       Default        | Required |                                                       Notes                                                        |
+| :----------------- | :-----: | :------------------: | :------: | :----------------------------------------------------------------------------------------------------------------: |
 | AI_PROVIDER        | string |        openai        |   Yes    |                                     Select AI Provider: `openai` or `gemini`.                                      |
 | OPENAI_API_KEY     | string |         None         |   Yes    |    Required when `AI Provider` is set to `OpenAI`. [OpenAI token](https://platform.openai.com/account/api-keys)    |
 | OPENAI_BASE_URL    | string |         None         |    No    |                If using Azure, use: https://{resource}.openai.azure.com/openai/deployments/{model}                 |
@@ -74,6 +72,7 @@ In the VSCode settings, locate the "ai-commit" configuration options and configu
 | GEMINI_MODEL       | string | gemini-2.0-flash-001 |   Yes    |                       Gemini MODEL. Currently, model selection is limited to configuration.                        |
 | GEMINI_TEMPERATURE | number |         0.7          |    No    | Controls randomness in the output. Range: 0-2 for Gemini. Lower values: more focused, Higher values: more creative |
 | AI_COMMIT_LANGUAGE | string |          en          |   Yes    |                                               Supports 19 languages                                                |
+| EMOJI_ENABLED      | boolean |        true         |    No    |                    Enable Gitmoji. When disabled, commit messages won't include emoji prefixes                      |
 | SYSTEM_PROMPT      | string |         None         |    No    |                                                Custom system prompt                                                |
 
 ## ⌨️ Local Development
